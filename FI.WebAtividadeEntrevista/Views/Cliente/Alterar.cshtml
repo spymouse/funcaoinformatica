@@ -1,0 +1,66 @@
+﻿@model WebAtividadeEntrevista.Models.ClienteModel
+@{
+    ViewBag.Title = "Alterar Cliente";
+}
+@section scripts{
+    <script>
+        var urlPost = '@Url.Action("Alterar", "Cliente", new { area = "" })';
+        var obj = @Html.Raw(Json.Encode(Model));
+        var urlRetorno = '@Url.Action("Index", "Cliente", new { area = "" })';
+        var urlBeneficiaroClienteList = '@Url.Action("BeneficiaroClienteList", "Cliente", new { area = "" })';
+
+    </script>
+    @Scripts.Render("~/bundles/altClientes")
+}
+<h2>@Html.Raw(ViewBag.Title)</h2>
+@Html.Partial("Forms")
+
+<div id="modalBeneficiario" class="modal fade modal-lg">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">Beneficiário</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="Nome">CPF:</label>
+                            <input required="required" type="text" class="form-control" id="CpfBeneficiario" name="CpfBeneficiario" placeholder="Ex.: 010.011.111-00" maxlength="14">
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="Sobrenome">Nome:</label>
+                            <input required="required" type="text" class="form-control" id="NomeBeneficiario" name="NomeBeneficiario" placeholder="Ex.: da Silva" maxlength="255">
+                        </div>
+                    </div>
+                    <div class="col-sm-2" style="margin-top: 24px">
+                        <div class="form-group">
+                            <button id="btnIncluirBeneficiario" class="btn  btn-success">Incluir</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="max-height: 200px;overflow: auto;">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col" style="width: 100px;">Cpf</th>
+                                <th scope="col">Nome</th>
+                                <th scope="col" style="width: 80px;"></th>
+                                <th scope="col" style="width: 80px;"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="thBeneficiarioInclusao">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
